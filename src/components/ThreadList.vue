@@ -26,7 +26,7 @@
             <p class="text-xsmall">
               <a href="#">{{ userById(thread.userId).name }}</a>
             </p>
-            <p class="text-xsmall text-faded">{{ thread.publishedAt }}</p>
+            <p class="text-xsmall text-faded"><AppDate :timestamp="thread.publishedAt" /> </p>
           </div>
         </div>
       </div>
@@ -37,32 +37,30 @@
 
 <script>
 import sourceData from '@/data.json'
-import AppDate from '@/components/AppDate'
+import AppDate from './AppDate.vue'
 
 export default {
-  props: {
-    threads: {
-      type: Array,
-      required: true
-    }
-  },
-  components: {
-    AppDate
-  },
-  data () {
-    return {
-      posts: sourceData.posts,
-      users: sourceData.users
-    }
-  },
-  methods: {
-    postById (postId) {
-      return this.posts.find(p => p.id === postId)
+    props: {
+        threads: {
+            type: Array,
+            required: true
+        }
     },
-    userById (userId) {
-      return this.users.find(p => p.id === userId)
-    }
-  }
+    data() {
+        return {
+            posts: sourceData.posts,
+            users: sourceData.users
+        };
+    },
+    methods: {
+        postById(postId) {
+            return this.posts.find(p => p.id === postId);
+        },
+        userById(userId) {
+            return this.users.find(p => p.id === userId);
+        }
+    },
+    components: { AppDate }
 }
 </script>
 
